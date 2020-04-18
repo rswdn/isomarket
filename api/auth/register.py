@@ -9,21 +9,21 @@ c = connection.cursor()
 class login:
 
     def __init__(self):
-        self.username = username
-        self.password = password
-        self.confirmPassword =  confirmPassword
-        self.hashed = hashed
+        self.username = ''
+        self.password = ''
+        self.confirmPassword = ''
+        self.hashed = ''
 
-    def newUser():
+    def newUser(self):
         #getting username and password
-        username = request.form['username']
-        password = request.form['password']
-        confirmPassword = request.form['confirmPassword']
+        self.username = request.form['username']
+        self.password = request.form['password']
+        self.confirmPassword = request.form['confirmPassword']
         #checking if passwords match
-        if confirmPassword == password:
-           hashed =  bcrypt.hash(confirmPassword) #If passwords match, hashpassword
+        if self.confirmPassword == self.password:
+           self.hashed =  bcrypt.hash(self.confirmPassword) #If passwords match, hashpassword
            #commiting all to the database & returning successful string
-           c.execute("INSERT INTO users (username,password) VALUES(%s, %s)",(username,hashed))
+           c.execute("INSERT INTO users (username,password) VALUES(%s, %s)",(self.username,self.hashed))
            connection.commit()
            c.close()
 

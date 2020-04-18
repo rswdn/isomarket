@@ -15,6 +15,7 @@ def books():
 
 @app.route('/auth/register', methods=['POST', 'GET'])
 def test():
-    return jsonify(login.newUser())
+    result = login().newUser()
+    return jsonify(result)
 
 app.run()
