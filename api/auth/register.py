@@ -2,11 +2,10 @@ import flask
 from flask import jsonify, request
 from passlib.hash import bcrypt
 from db import connection
-import psycopg2
 
 c = connection.cursor()
 
-class login:
+class register:
 
     def __init__(self):
         self.username = ''

@@ -1,7 +1,8 @@
 import flask 
 from flask import request, jsonify, redirect, url_for
 import test
-from auth.register import login
+from auth.register import register
+from auth.login import login
 
 app = flask.Flask(__name__)
 app.config['DEBUG'] = True
@@ -14,8 +15,13 @@ def books():
     return jsonify(test.books)
 
 @app.route('/auth/register', methods=['POST', 'GET'])
-def test():
-    result = login().newUser()
-    return jsonify(result)
+def registerUser():
+    result_register = register().newUser()
+    return jsonify(result_register)
+
+@app.route('/auth/login', methods=[ 'POST'])
+def loginUser():
+    result_login = login().userLogin()
+    return jsonify(result_login)
 
 app.run()
