@@ -38,11 +38,3 @@ class register:
         
 
 
-#password1 = input('Please enter password: ')
-#password2 = bcrypt.hash(password1)
-
-#password3 = input('Please confirm password: ')
-#result = password3
-
-#print(bcrypt.verify(password3, password2))
-
