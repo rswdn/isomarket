@@ -34,7 +34,7 @@ def loginUser():
     result_login = login().userLogin()
     return jsonify(result_login)
 
-@app.route('/add', methods=[ 'POST'])
+@app.route('/add', methods=['GET','POST'])
 def add():
     result_add = addMoney().add()
     return jsonify(result_add)
@@ -43,5 +43,5 @@ def add():
 def listWorker():
     result_worker = workers().getWorker()
     return jsonify(result_worker)
-
-app.run()
+if __name__ == '__main__':
+    app.run()

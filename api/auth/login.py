@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request
+from flask import jsonify, request, abort, json
 from passlib.hash import bcrypt
 from db import connection
 
@@ -20,12 +20,17 @@ class login:
         #pulling records from the database based on username
         c.execute("SELECT * FROM users WHERE username = %s;", (self.username,))
         rows = c.fetchone() #fetching the vaild row
-
+        #checking if username exists, if not returing a 401 error 
+        if rows is None:
+           return abort(401, description='Incorrect username or password, please try again. ')
         #chcking if the username matches the inputted username
-        if rows[1] == self.username:
+        elif rows[1] == self.username:
            result = bcrypt.verify(self.password, rows[2]) #using bcrypt to verify password
 
            return(result) # returing results TODO redirect this to the vailid endpoint
+
+
+
 
        
 
