@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request
+from flask import jsonify, request, abort
 from db import connection
 
 c = connection.cursor()
@@ -15,13 +15,15 @@ class addMoney:
     
     
 
-    def add(self):
+    def get_worker(self):
         self.worker = request.form['worker_button']#getting the username
         c.execute("SELECT name FROM workers WHERE name = %s;", (self.worker,))#executing 
-        row = c.fetchone#fetcing results
+        rows = c.fetchone#fetcing results
         
-        #checking if user exists, then getting the current balance
-        if row == self.worker:
+        #checking if user exists
+        if rows is None: #if not return 401 error
+            return abort(401, description='Something went wrong, please try again. ')
+        else:
             c.execute("SELECT value FROM workers WHERE name = %s;", (self.worker,))#Selecting the worker value based on the selectWOrker result
             value_row = c.fetchone()
             self.currentBalance = value_row #setting the currentBalance to the resut of the query
@@ -34,6 +36,8 @@ class addMoney:
 
             conn.commit()
 
+
+#TODO create a user session pages where it carries the selected user over to the add user page
 
 
 

@@ -27,12 +27,13 @@ class login:
         elif rows[1] == self.username:
            result = bcrypt.verify(self.password, rows[2]) #using bcrypt to verify password
 
-           return(result) # returing results TODO redirect this to the vailid endpoint
+           return(result) # returing results 
 
 
 
+#TODO adding a test to see if password matches, if not return 401 error and "incorect username or passowrd, please try again
+# TODO redirect this to the vailid endpoint
 
-       
 
 
 

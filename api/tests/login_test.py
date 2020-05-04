@@ -1,5 +1,5 @@
 import flask
-from flask import Flask, json, jsonify, request
+from flask import Flask, request
 import pytest
 from app import app
 
@@ -17,7 +17,7 @@ def test_login(client):
 
 
 def test_login_error(client):
-    data ={"username":"test123", "password":"test123"}
+    data ={"username":"test900000", "password":"test9000"}
     url = 'http://localhost:5000/auth/login'
     response = client.post(url, data=data)
     assert response.status_code == 401
