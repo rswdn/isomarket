@@ -10,13 +10,11 @@ class workers:
         self.name = ''
         self.value = ''
 
-    def getWorker(self):
+    def displayWorker(self):
         c.execute('SELECT * FROM workers')
         rows = c.fetchall()
 
         return rows
-
-
 
 
 

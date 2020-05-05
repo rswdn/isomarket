@@ -35,8 +35,8 @@ def loginUser():
     return jsonify(result_login)
 
 @app.route('/add', methods=['GET','POST'])
-def add():
-    result_add = addMoney().add()
+def get_worker():
+    result_add = addMoney().getWorker()
     return jsonify(result_add)
 
 @app.route('/home', methods=['GET'])
