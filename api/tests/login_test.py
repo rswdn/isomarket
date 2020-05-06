@@ -21,3 +21,9 @@ def test_login_error(client):
     url = 'http://localhost:5000/auth/login'
     response = client.post(url, data=data)
     assert response.status_code == 401
+
+def test_password_error(client):
+    data ={"username":"test8", "password":"test90"}
+    url = 'http://localhost:5000/auth/login'
+    response = client.post(url, data=data)
+    assert response.status_code == 401

@@ -9,6 +9,7 @@ from add import addMoney
 
 app = flask.Flask(__name__)
 app.config['DEBUG'] = True
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 def login_required(f):
     @wraps

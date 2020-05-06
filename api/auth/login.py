@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request, abort, json
+from flask import jsonify, request, abort, session
 from passlib.hash import bcrypt
 from db import connection
 
@@ -26,8 +26,12 @@ class login:
         #chcking if the username matches the inputted username
         elif rows[1] == self.username:
            result = bcrypt.verify(self.password, rows[2]) #using bcrypt to verify password
+           if result is True:
+               session['logged_in'] = True
+               return('success') # returing results
 
-           return(result) # returing results 
+           else:
+               return abort(401, description='Incorrect username or passowrd, pleae try again. ')
 
 
 
