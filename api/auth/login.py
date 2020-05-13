@@ -28,14 +28,12 @@ class login:
            result = bcrypt.verify(self.password, rows[2]) #using bcrypt to verify password
            if result is True:
                session['logged_in'] = True
-               return('success') # returing results
 
            else:
                return abort(401, description='Incorrect username or passowrd, pleae try again. ')
 
 
 
-#TODO adding a test to see if password matches, if not return 401 error and "incorect username or passowrd, please try again
 # TODO redirect this to the vailid endpoint
 
 
