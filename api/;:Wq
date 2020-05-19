@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request, abort, session, redirect, url_for
+from flask import jsonify, request, abort, session
 from passlib.hash import bcrypt
 from db import connection
 
@@ -27,9 +27,8 @@ class login:
         elif rows[1] == self.username:
            result = bcrypt.verify(self.password, rows[2]) #using bcrypt to verify password
            if result is True:
-               session['user'] = request.form['username']
+               session['logged_in'] = True
                session.permanent = True
-               return jsonify('home.html')
 
            else:
                return abort(401, description='Incorrect username or passowrd, pleae try again. ')

@@ -15,6 +15,7 @@ def test_notLoggedIn(client):
     assert response.status_code == 401
 
 def test_getUsers(client):
+    session['logged_in'] = True
     url = 'http://localhost:5000/home'
     response = client.get(url)
     assert response.status_code == 200

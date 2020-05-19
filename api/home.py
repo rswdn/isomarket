@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request
+from flask import jsonify, request, session
 from db import connection
 
 c = connection.cursor()
