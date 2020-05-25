@@ -34,10 +34,12 @@ def loginUser():
     response = login().userLogin()
     return response
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET','POST'])
 def logOut():
-    session.pop('user', None)
-    return jsonify('index.html')
+    if 'user' in session:
+        session.pop('user', None)
+        return "logged out"
+
 
 @app.route('/add', methods=['GET','POST'])
 def get_worker():
@@ -50,8 +52,6 @@ def listWorker():
         return abort(401, description="You need to login!")
     else:
         response = jsonify(workers().displayWorker())
-        response.headers.add('Access-Control-Allow-Headers',
-                         "Origin, X-Requested-With, Content-Type, Accept, x-auth")
         return response
 
 if __name__ == '__main__':

@@ -13,7 +13,7 @@ class workers:
     def displayWorker(self):
         c.execute('SELECT * FROM workers')
         rows = c.fetchall()
-
+        
         return rows
 
 
