@@ -41,10 +41,19 @@ def logOut():
         return "logged out"
 
 
-@app.route('/add', methods=['GET','POST'])
+@app.route('/add', methods=['POST'])
 def get_worker():
-    result_add = addMoney().getWorker()
-    return jsonify(result_add)
+    if 'user' in session:
+        response = addMoney().getWorker()
+        return response
+
+@app.route('/add', methods=['GET'])
+def add_value():
+    if 'user' not in session:
+        return abort(401, description="You need to login!")
+    else:
+        response = addMoney().addValue()
+        return response
 
 @app.route('/home', methods=['GET'])
 def listWorker():
