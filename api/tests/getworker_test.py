@@ -10,6 +10,7 @@ def client():
     return app.test_client()
   
 def test_worker(client):
+    session['user'] == True
     data ={"worker":"Marisee"}
     url = 'http://localhost:5000/add'
     response = client.post(url, data=data)

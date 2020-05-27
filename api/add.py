@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request, abort
+from flask import jsonify, request, abort, session
 from db import connection
 
 c = connection.cursor()
@@ -12,23 +12,17 @@ class addMoney:
         self.newBalance = ''
         self.worker = ''
         self.values = ''
+        
     
-    def getWorker(self):
-        self.worker = request.form['worker']#getting the username
-        c.execute("SELECT name FROM workers WHERE name = %s;", (self.worker,))#executing 
-        rows = c.fetchone()#fetcing results
-        #checking if user exists
-        if rows is None: #if not return 401 error
-            return abort(401, jsonify('index.html'))
-        else:
-            return jsonify('add.html')
-            #return(addMoney().add_value())
-
-    def add_value(self):
-        c.execute("SELECT * FROM workers WHERE name = %s;", (self.worker,))#Selecting th        e worker value based on the selectWOrker result
+    def add(self):
+        self.worker = session.get("worker")
+        c.execute("SELECT name,value FROM workers WHERE name = %s;", (self.worker ,))#Selecting th        e worker value based on the selectWOrker result
         value_row = c.fetchone()
 
-        return jsonify(value_row)
+        if value_row is None: #if not return 401 error
+            return abort(404, jsonify('Something went wrong'))
+        else:
+            return jsonify(value_row)
 
        # self.currentBalance = value_row #setting the currentBalance to the resut of the query
         #self.addValue = request.form['result'] #fetching the new result to be added from the client

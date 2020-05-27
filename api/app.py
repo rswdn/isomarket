@@ -43,24 +43,21 @@ def logOut():
 
 @app.route('/add', methods=['POST'])
 def get_worker():
-    if 'user' in session:
-        response = addMoney().getWorker()
-        return response
-
-@app.route('/add', methods=['GET'])
-def add_value():
     if 'user' not in session:
         return abort(401, description="You need to login!")
     else:
-        response = addMoney().addValue()
+        response = addMoney().add()
         return response
 
-@app.route('/home', methods=['GET'])
+@app.route('/home', methods=['GET', 'POST'])
 def listWorker():
     if 'user' not in session:
         return abort(401, description="You need to login!")
-    else:
+    elif request.method == 'GET':
         response = jsonify(workers().displayWorker())
+        return response
+    else:
+        response = workers().getWorker()
         return response
 
 if __name__ == '__main__':

@@ -9,6 +9,7 @@ class workers:
     def __init__(self):
         self.name = ''
         self.value = ''
+        self.worker = ''
 
     def displayWorker(self):
         c.execute('SELECT * FROM workers')
@@ -16,7 +17,17 @@ class workers:
         
         return rows
 
-
+    def getWorker(self):
+          self.worker = request.form['worker']#getting the username
+          c.execute("SELECT name FROM workers WHERE name = %s;", (self.worker,))#executing 
+          rows = c.fetchone()#fetcing results
+          #checking if user exists
+          if rows is None: #if not return 401 error
+              return abort(401, jsonify('index.html'))
+          else:
+              session['worker'] = request.form['worker']
+              return jsonify('add.html')
+              #return(addMoney().add_value())
 
 
 
