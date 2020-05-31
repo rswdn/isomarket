@@ -22,16 +22,18 @@ class addMoney:
         if value_row is None: #if not return 401 error
             return abort(404, jsonify('Something went wrong'))
         else:
+            session['value'] = value_row[1]
             return jsonify(value_row)
 
-       # self.currentBalance = value_row #setting the currentBalance to the resut of the query
-        #self.addValue = request.form['result'] #fetching the new result to be added from the client
-        #self.newBalance = int(self.currentBalance) + int(self.addValue) #adding the new value with the current balance to get the newBalance
-        #c.execute("UPDATE workers SET value = %s WHERE name = %s;"(self.newBalance, self.worker,))
-        #conn.commit()
-        #conn.close()
+    def updateValue(self):
+        value_row = session.get("value")
+        self.addValue = request.form['total'] #fetching the new result to be added from the client
+        self.newBalance = int(value_row) + int(self.addValue) #adding the new value with the current balance to get the newBalance
+       # c.execute("UPDATE workers SET value = %s WHERE name = %s;"(self.newBalance, self.worker,))
+       # conn.commit()
+       # conn.close()
 
-        #return 
+        return jsonify('worked') 
 
 
 
@@ -46,7 +48,6 @@ class addMoney:
 
 
             
-
 
 
 

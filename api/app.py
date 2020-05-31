@@ -5,24 +5,12 @@ from auth.register import register
 from auth.login import login
 from functools import wraps
 from add import addMoney
+from addvalue import addValue
 from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
 app.secret_key = "super_secret_key"
 CORS(app, supports_credentials=True)
-
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            return abort(401, description="You need to login")
-    return wrap
-
-@app.route('/test', methods=['GET'])
-def books():
-    return jsonify(test.books)
 
 @app.route('/auth/register', methods=['POST'])
 def registerUser():
@@ -46,8 +34,16 @@ def get_worker():
     if 'user' not in session:
         return abort(401, description="You need to login!")
     else:
-        response = addMoney().add()
-        return response
+       response = addMoney().add()
+       return response
+
+@app.route('/addvalue', methods=['POST'])
+def add_value(): 
+    if 'user' not in session:
+        return abort(401, description="You need to login!")
+    else:
+       response = addValue().updateValue()
+       return response
 
 @app.route('/home', methods=['GET', 'POST'])
 def listWorker():
