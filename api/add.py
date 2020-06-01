@@ -25,16 +25,6 @@ class addMoney:
             session['value'] = value_row[1]
             return jsonify(value_row)
 
-    def updateValue(self):
-        value_row = session.get("value")
-        self.addValue = request.form['total'] #fetching the new result to be added from the client
-        self.newBalance = int(value_row) + int(self.addValue) #adding the new value with the current balance to get the newBalance
-       # c.execute("UPDATE workers SET value = %s WHERE name = %s;"(self.newBalance, self.worker,))
-       # conn.commit()
-       # conn.close()
-
-        return jsonify('worked') 
-
 
 
 

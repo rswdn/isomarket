@@ -9,17 +9,17 @@ from app import app
 def client():
     return app.test_client()
 
-def test_getWorker(client):
+def test_selectWorker(client):
     with app.test_client() as c:
         with c.session_transaction() as sess:
             sess['user'] = True
     data ={"worker":"Marisee"}
     url = 'http://localhost:5000/home'
-    response = c.get(url, data=data)
+    response = c.post(url, data=data)
     assert response.status_code == 200
 
-def test_noLogin_getWorker(client):
+def test_noLogin_selectWorker(client):
     data ={"worker":"Marisee"}
     url = 'http://localhost:5000/home'
-    response = client.get(url, data=data)
+    response = client.post(url, data=data)
     assert response.status_code == 401
