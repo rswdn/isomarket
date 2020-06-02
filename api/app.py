@@ -7,6 +7,7 @@ from functools import wraps
 from add import addMoney
 from addvalue import addValue
 from flask_cors import CORS, cross_origin
+from minusvalue import minusValue
 
 app = flask.Flask(__name__)
 app.secret_key = "super_secret_key"
@@ -42,7 +43,15 @@ def add_value():
     if 'user' not in session:
         return abort(401, description="You need to login!")
     else:
-       response = addValue().updateValue()
+       response = addValue().updateAddValue()
+       return response
+
+@app.route('/minusvalue', methods=['POST'])
+def minus_value(): 
+    if 'user' not in session:
+        return abort(401, description="You need to login!")
+    else:
+       response = minusValue().updateMinusValue()
        return response
 
 @app.route('/home', methods=['GET', 'POST'])
