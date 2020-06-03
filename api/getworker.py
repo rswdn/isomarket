@@ -4,7 +4,7 @@ from db import connection
 
 c = connection.cursor()
 
-class addMoney:
+class workerInfo:
 
     def __init__(self):
         self.currentBalance = ''
@@ -14,9 +14,9 @@ class addMoney:
         self.values = ''
         
     
-    def add(self):
+    def getWorker(self):
         self.worker = session.get("worker")
-        c.execute("SELECT name,value FROM workers WHERE name = %s;", (self.worker ,))#Selecting th        e worker value based on the selectWOrker result
+        c.execute("SELECT name,value FROM workers WHERE name = %s;", (self.worker ,))#Selecting the worker value based on the selectWorker result
         value_row = c.fetchone()
 
         if value_row is None: #if not return 401 error

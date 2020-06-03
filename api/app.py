@@ -4,7 +4,7 @@ from home import workers
 from auth.register import register
 from auth.login import login
 from functools import wraps
-from add import addMoney
+from getworker import workerInfo
 from addvalue import addValue
 from flask_cors import CORS, cross_origin
 from minusvalue import minusValue
@@ -30,12 +30,12 @@ def logOut():
         return "logged out"
 
 
-@app.route('/add', methods=['POST'])
+@app.route('/getworker', methods=['POST'])
 def get_worker():
     if 'user' not in session:
         return abort(401, description="You need to login!")
     else:
-       response = addMoney().add()
+       response = workerInfo().getWorker()
        return response
 
 @app.route('/addvalue', methods=['POST'])
