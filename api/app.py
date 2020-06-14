@@ -57,7 +57,7 @@ def minus_value():
 @app.route('/home', methods=['GET', 'POST'])
 def listWorker():
     if 'user' not in session:
-        return abort(401, description="You need to login!")
+        return abort(401, description="You need to login")
     elif request.method == 'GET':
         response = jsonify(workers().displayWorker())
         return response

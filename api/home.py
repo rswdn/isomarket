@@ -1,5 +1,5 @@
 import flask
-from flask import jsonify, request, session
+from flask import jsonify, request, session, abort
 from db import connection
 
 c = connection.cursor()
@@ -23,11 +23,10 @@ class workers:
           rows = c.fetchone()#fetcing results
           #checking if user exists
           if rows is None: #if not return 401 error
-              return abort(401, jsonify('index.html'))
+              return abort(404)
           else:
               session['worker'] = request.form['worker']
               return jsonify('add.html')
-              #return(addMoney().add_value())
 
 
 
